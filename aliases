@@ -3,10 +3,22 @@
 #        I'd have put something like 'mkdir -p ~/var' in m(), but I didn't want the
 #        extra call to mkdir everytime m() was called.
 #
+
+# Mark a directory (ie, set the directory)
 function m()   { pwd > ~/var/mdir${1}; }
+
+# Go to a directory
 function g()   { cd `cat ~/var/mdir${1}`; }
+
+# Print the directory.  Useful for embedding in scripts. eg: "cp `p somedir`/file.ext ."
 function p()   { cat ~/var/mdir${1}; }
+
+# Delete the mark
 function d()   { rm -f ~/var/mdir${1}; }
+
+# Prints the list of all marks.
+# The usage of 'k' is historical.  It used to be called 'mlk' for 'm' and 'look'.  Then
+# I shortened it to one letter.  Since I don't like the idea of using 'l', I chose 'k'.
 function k()   { grep . ~/var/mdir* |  sed "s/:/       /"; }
 
 alias notes='vi ~/notes.txt'
