@@ -1,0 +1,20 @@
+#
+# n.b. - The '~/var' directory needs to exist before these script will work properly.
+#        I'd have put something like 'mkdir -p ~/var' in m(), but I didn't want the
+#        extra call to mkdir everytime m() was called.
+#
+function m()   { pwd > ~/var/mdir${1}; }
+function g()   { cd `cat ~/var/mdir${1}`; }
+function p()   { cat ~/var/mdir${1}; }
+function d()   { rm -f ~/var/mdir${1}; }
+function k()   { grep . ~/var/mdir* |  sed "s/:/       /"; }
+
+alias notes='vi ~/notes.txt'
+
+function timer() {
+    for i in `seq 0 300`; do
+        clear
+        echo $i | awk '{printf "%d min, %d sec\n", int($1/60),$1%60}'
+        sleep 1
+    done
+}
